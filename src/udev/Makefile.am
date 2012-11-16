@@ -45,7 +45,6 @@ libudev_core_la_SOURCES = \
 	udev-rules.c \
 	udev-ctrl.c \
 	udev-builtin.c \
-	udev-builtin-blkid.c \
 	udev-builtin-btrfs.c \
 	udev-builtin-firmware.c \
 	udev-builtin-hwdb.c \
@@ -129,6 +128,11 @@ endif
 libudev_core_la_CPPFLAGS = \
 	$(AM_CPPFLAGS) \
 	-DFIRMWARE_PATH="$(FIRMWARE_PATH)"
+
+if HAVE_BLKID
+libudev_core_la_SOURCES += \
+	udev-builtin-blkid.c
+endif
 
 #
 # Extras
