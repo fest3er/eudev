@@ -5,7 +5,8 @@ LIBUDEV_REVISION=0
 LIBUDEV_AGE=2
 
 AM_CPPFLAGS = \
-	-I $(top_srcdir)/src/udev
+	-I $(top_srcdir)/src/udev \
+	-DHWDB_BIN=\"/etc/udev/hwdb.bin\"
 
 lib_LTLIBRARIES = \
 	libudev.la
