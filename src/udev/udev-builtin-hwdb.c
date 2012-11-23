@@ -33,9 +33,6 @@ int udev_builtin_hwdb_lookup(struct udev_device *dev, const char *modalias, bool
         struct udev_list_entry *entry;
         int n = 0;
 
-        if (!hwdb)
-                return EXIT_FAILURE;
-
         udev_list_entry_foreach(entry, udev_hwdb_get_properties_list_entry(hwdb, modalias, 0)) {
                 if (udev_builtin_add_property(dev, test,
                                               udev_list_entry_get_name(entry),
