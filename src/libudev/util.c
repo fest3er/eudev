@@ -4582,7 +4582,12 @@ int fopen_temporary(const char *path, FILE **_f, char **_temp_path) {
         t[k] = '.';
         stpcpy(stpcpy(t+k+1, fn), "XXXXXX");
 
+#if HAVE_DECL_MKOSTEMP
         fd = mkostemp(t, O_WRONLY|O_CLOEXEC);
+#else
+        fd = mkstemp(t);
+        fcntl(conn->sock, F_SETFD, FD_CLOEXEC);
+#endif
         if (fd < 0) {
                 free(t);
                 return -errno;
