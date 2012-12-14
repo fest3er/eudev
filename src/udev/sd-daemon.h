@@ -187,7 +187,7 @@ int sd_is_socket_unix(int fd, int type, int listening, const char *path, size_t 
   0 otherwise. If path is NULL a message queue name check is not
   done. Returns a negative errno style error code on failure.
 */
-int sd_is_mq(int fd, const char *path);
+//int sd_is_mq(int fd, const char *path);
 
 /*
   Informs systemd about changed daemon state. This takes a number of
