@@ -28,3 +28,7 @@ dist_udevrules_DATA += \
 	95-keymap.rules \
 	95-keyboard-force-release.rules
 endif
+
+install-data-hook:
+	-$(MKDIR_P) $(DESTDIR)$(sysconfdir)/udev/rules.d
+

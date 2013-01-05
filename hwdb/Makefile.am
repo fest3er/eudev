@@ -7,3 +7,6 @@ dist_udevhwdb_DATA = \
 	20-usb-classes.hwdb \
 	20-acpi-vendor.hwdb \
 	20-OUI.hwdb
+
+install-data-hook:
+	-$(MKDIR_P) $(DESTDIR)$(sysconfdir)/udev/hwdb.d
