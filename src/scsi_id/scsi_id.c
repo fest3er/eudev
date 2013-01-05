@@ -289,7 +289,11 @@ static int get_file_options(struct udev *udev,
                          * Something matched. Allocate newargv, and store
                          * values found in options_in.
                          */
-                        strcpy(buffer, options_in);
+			if (options_in != NULL)
+	                        strcpy(buffer, options_in);
+			else
+				buffer[0]='\0';
+
                         c = argc_count(buffer) + 2;
                         *newargv = calloc(c, sizeof(**newargv));
                         if (!*newargv) {

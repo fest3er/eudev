@@ -453,7 +453,7 @@ char *split(const char *c, size_t *l, const char *separator, char **state) {
 
         current = *state ? *state : (char*) c;
 
-        if (!*current || *c == 0)
+        if (!current || !*current || *c == 0)
                 return NULL;
 
         current += strspn(current, separator);
@@ -4321,7 +4321,7 @@ int execute_command(const char *command, char *const argv[])
         {
                 siginfo_t si;
 
-                int r = waitid(P_PID, pid, &si, WEXITED);
+                waitid(P_PID, pid, &si, WEXITED);
 
                 if (!is_clean_exit(si.si_code, si.si_status, NULL)) {
                         if (si.si_code == CLD_EXITED)

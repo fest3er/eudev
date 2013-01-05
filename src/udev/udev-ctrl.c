@@ -366,6 +366,8 @@ struct udev_ctrl_msg *udev_ctrl_receive_msg(struct udev_ctrl_connection *conn)
         struct ucred *cred;
         char cred_msg[CMSG_SPACE(sizeof(struct ucred))];
 
+	if (conn == NULL)
+		return NULL;
         uctrl_msg = calloc(1, sizeof(struct udev_ctrl_msg));
         if (uctrl_msg == NULL)
                 return NULL;

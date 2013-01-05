@@ -108,6 +108,7 @@ static struct trie_node *node_lookup(const struct trie_node *node, uint8_t c) {
         struct trie_child_entry search;
 
         search.c = c;
+	if (node->children == NULL) return NULL;
         child = bsearch(&search, node->children, node->children_count, sizeof(struct trie_child_entry), trie_children_cmp);
         if (child)
                 return child->child;
@@ -587,7 +588,7 @@ static int adm_hwdb(struct udev *udev, int argc, char *argv[]) {
 
                         udev_list_entry_foreach(entry, udev_hwdb_get_properties_list_entry(hwdb, test, 0))
                                 printf("%s=%s\n", udev_list_entry_get_name(entry), udev_list_entry_get_value(entry));
-                        hwdb = udev_hwdb_unref(hwdb);
+                        udev_hwdb_unref(hwdb);
                 }
         }
 out:

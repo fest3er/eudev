@@ -439,7 +439,7 @@ static int test_hwdb(struct udev *udev, const char *modalias) {
                 printf("'%s'='%s'\n", udev_list_entry_get_name(entry), udev_list_entry_get_value(entry));
         printf("\n");
 
-        hwdb = udev_hwdb_unref(hwdb);
+        udev_hwdb_unref(hwdb);
         return 0;
 }
 

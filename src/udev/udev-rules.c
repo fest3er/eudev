@@ -1634,7 +1634,7 @@ struct udev_rules *udev_rules_new(struct udev *udev, int resolve_names)
         }
         strv_uniq(rules->dirs);
 
-        rules->dirs_ts_usec = calloc(strv_length(rules->dirs), sizeof(long long));
+        rules->dirs_ts_usec = calloc(strv_length(rules->dirs), sizeof(uint64_t));
         if(!rules->dirs_ts_usec)
                 return udev_rules_unref(rules);
         udev_rules_check_timestamp(rules);
