@@ -222,11 +222,9 @@ AM_CONDITIONAL([ENABLE_KEYMAP], [test "x$enable_keymap" = "xyes"])
 AC_ARG_ENABLE([hwdb-installation],
        AS_HELP_STRING([--disable-hwdb-installation], [disable installation of hwdb @<:@default=enabled@:>@]),
        [], [enable_hwdb_installation=yes])
-AS_IF([test "x$enable_hwdb_installation" = "xyes"], [
-        AC_PATH_PROG([WGET],[wget])
-        AC_PATH_PROG([PERL],[perl])
-])
+AC_PATH_PROG([WGET],[wget])
 AM_CONDITIONAL([WGET_FOUND],[test -n "$WGET"])
+AC_PATH_PROG([PERL],[perl])
 AM_CONDITIONAL([PERL_FOUND],[test -n "$PERL"])
 AM_CONDITIONAL([ENABLE_HWDB_INSTALLATION], [test "x$enable_hwdb_installation" = "xyes"])
 
