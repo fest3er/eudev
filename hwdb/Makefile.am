@@ -1,11 +1,8 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
-EXTRA_DIST = \
-	ids-update.pl
-
 if ENABLE_HWDB_INSTALLATION
 
-dist_udevhwdb_DATA = \
+udevhwdb_DATA = \
 	20-pci-vendor-product.hwdb \
 	20-pci-classes.hwdb \
 	20-usb-vendor-product.hwdb \
@@ -13,28 +10,17 @@ dist_udevhwdb_DATA = \
 	20-acpi-vendor.hwdb \
 	20-OUI.hwdb
 
-all-local: $(dist_udevhwdb_DATA)
+.NOTPARALLEL: $(udevhwdb_DATA)
+$(udevhwdb_DATA):
+	@echo "=================================================" && \
+	echo "$@ not found" && \
+	echo " " && \
+	echo "Please download and extract to here a copy of the" && \
+	echo "Combined hardware identification databases, from" && \
+	echo "https://github.com/gentoo/hwids" && \
+	echo "==================================================" && \
+	exit 1
 
-if PERL_FOUND
-$(dist_udevhwdb_DATA): usb.ids pci.ids oui.txt
-	$(PERL) ids-update.pl
-
-if WGET_FOUND
-define wget-hwdb-source
-	$(WGET) -q -O $@ $$url
-endef
-
-usb.ids:
-	url=http://www.linux-usb.org/usb.ids && $(wget-hwdb-source)
-
-pci.ids:
-	url=http://pci-ids.ucw.cz/v2.2/pci.ids && $(wget-hwdb-source)
-
-oui.txt:
-	url=http://standards.ieee.org/develop/regauth/oui/oui.txt && $(wget-hwdb-source)
-
-endif
-endif
 endif
 
 install-data-hook:
