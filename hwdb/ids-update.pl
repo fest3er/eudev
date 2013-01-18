@@ -8,7 +8,7 @@ sub usb_vendor {
 
         open(IN, "<", "usb.ids");
         open(OUT, ">", "20-usb-vendor-product.hwdb");
-        print(OUT "# This file is part of systemd.\n" .
+        print(OUT "# This file is part of eudev.\n" .
                   "#\n" .
                   "# Data imported and updated from: http://www.linux-usb.org/usb.ids\n");
 
@@ -45,7 +45,7 @@ sub usb_classes {
 
         open(IN, "<", "usb.ids");
         open(OUT, ">", "20-usb-classes.hwdb");
-        print(OUT "# This file is part of systemd.\n" .
+        print(OUT "# This file is part of eudev.\n" .
                   "#\n" .
                   "# Data imported and updated from: http://www.linux-usb.org/usb.ids\n");
 
@@ -111,7 +111,7 @@ sub pci_vendor {
         open(IN, "<", "usb.ids");
         open(IN, "<", "pci.ids");
         open(OUT, ">", "20-pci-vendor-product.hwdb");
-        print(OUT "# This file is part of systemd.\n" .
+        print(OUT "# This file is part of eudev.\n" .
                   "#\n" .
                   "# Data imported and updated from: http://pci-ids.ucw.cz/v2.2/pci.ids\n");
 
@@ -160,7 +160,7 @@ sub pci_classes {
 
         open(IN, "<", "pci.ids");
         open(OUT, ">", "20-pci-classes.hwdb");
-        print(OUT "# This file is part of systemd.\n" .
+        print(OUT "# This file is part of eudev.\n" .
                   "#\n" .
                   "# Data imported and updated from: http://pci-ids.ucw.cz/v2.2/pci.ids\n");
 
@@ -210,7 +210,7 @@ sub pci_classes {
 sub oui {
         open(IN, "<", "oui.txt");
         open(OUT, ">", "20-OUI.hwdb");
-        print(OUT "# This file is part of systemd.\n" .
+        print(OUT "# This file is part of eudev.\n" .
                   "#\n" .
                   "# Data imported and updated from: http://standards.ieee.org/develop/regauth/oui/oui.txt\n");
 
