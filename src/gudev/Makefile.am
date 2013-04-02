@@ -145,23 +145,3 @@ CLEANFILES += \
 	$(gir_DATA) $(typelibs_DATA)
 
 endif # HAVE_INTROSPECTION
-
-# move lib from $(libdir) to $(rootlibdir) and update devel link, if needed
-libgudev-install-move-hook:
-	if test "$(libdir)" != "$(rootlibdir)"; then \
-		$(MKDIR_P) $(DESTDIR)$(rootlibdir) && \
-		so_img_name=$$(readlink $(DESTDIR)$(libdir)/libgudev-1.0.so) && \
-		so_img_rel_target_prefix=$$(echo $(libdir) | sed 's,\(^/\|\)[^/][^/]*,..,g') && \
-		ln -sf $$so_img_rel_target_prefix$(rootlibdir)/$$so_img_name $(DESTDIR)$(libdir)/libgudev-1.0.so && \
-		mv $(DESTDIR)$(libdir)/libgudev-1.0.so.* $(DESTDIR)$(rootlibdir); \
-	fi
-
-libgudev-uninstall-move-hook:
-	rm -f $(DESTDIR)$(rootlibdir)/libgudev-1.0.so*
-
-INSTALL_EXEC_HOOKS = \
-	libgudev-install-move-hook
-
-UNINSTALL_EXEC_HOOKS = \
-	libgudev-uninstall-move-hook
-
