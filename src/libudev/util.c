@@ -4898,6 +4898,23 @@ int get_user_creds(
         return 0;
 }
 
+char* gid_to_name(gid_t gid) {
+        struct group *p;
+        char *r;
+
+        if (gid == 0)
+                return strdup("root");
+
+        p = getgrgid(gid);
+        if (p)
+                return strdup(p->gr_name);
+
+        if (asprintf(&r, "%lu", (unsigned long) gid) < 0)
+                return NULL;
+
+        return r;
+}
+
 int get_group_creds(const char **groupname, gid_t *gid) {
         struct group *g;
         gid_t id;
@@ -4936,13 +4953,9 @@ int get_group_creds(const char **groupname, gid_t *gid) {
         return 0;
 }
 
-int in_group(const char *name) {
-        gid_t gid, *gids;
+int in_gid(gid_t gid) {
+        gid_t *gids;
         int ngroups_max, r, i;
-
-        r = get_group_creds(&name, &gid);
-        if (r < 0)
-                return r;
 
         if (getgid() == gid)
                 return 1;
@@ -4964,6 +4977,17 @@ int in_group(const char *name) {
                         return 1;
 
         return 0;
+}
+
+int in_group(const char *name) {
+        gid_t gid, *gids;
+        int ngroups_max, r, i;
+
+        r = get_group_creds(&name, &gid);
+        if (r < 0)
+                return r;
+
+	return in_gid(gid);
 }
 
 int glob_exists(const char *path) {

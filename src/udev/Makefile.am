@@ -81,6 +81,11 @@ libudev_core_la_LIBADD = \
 	$(BLKID_LIBS) \
 	$(SELINUX_LIBS)
 
+if HAVE_ACL
+libudev_core_la_SOURCES += udev-builtin-uaccess.c
+libudev_core_la_LIBADD += $(ACL_LIBS)
+endif
+
 if HAVE_BLKID
 libudev_core_la_SOURCES += \
 	udev-builtin-blkid.c

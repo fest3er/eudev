@@ -370,6 +370,25 @@ fail:
         return NULL;
 }
 
+int strv_push(char ***l, char *value) {
+        char **c;
+        unsigned n;
+
+        if (!value)
+                return 0;
+
+        n = strv_length(*l);
+        c = realloc(*l, sizeof(char*) * (n + 2));
+        if (!c)
+                return -ENOMEM;
+
+        c[n] = value;
+        c[n+1] = NULL;
+
+        *l = c;
+        return 0;
+}
+
 char **strv_uniq(char **l) {
         char **i;
 

@@ -64,6 +64,18 @@ noinst_HEADERS = \
 	strv.h \
 	util.h
 
+if HAVE_ACL
+
+libudev_la_SOURCES = \
+	acl-util.c \
+	logind-acl.c
+
+noinst_HEADERS += \
+	acl-util.h \
+	logind-acl.h
+
+endif
+
 include_HEADERS = \
 	libudev.h
 

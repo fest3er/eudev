@@ -486,6 +486,8 @@ int get_group_creds(const char **groupname, gid_t *gid);
 
 int in_group(const char *name);
 
+char* gid_to_name(gid_t gid);
+
 int glob_exists(const char *path);
 
 int dirent_ensure_type(DIR *d, struct dirent *de);
@@ -614,3 +616,4 @@ typedef enum DrawSpecialChar {
 const char *draw_special_char(DrawSpecialChar ch);
 
 char *strreplace(const char *text, const char *old_string, const char *new_string);
+int in_gid(gid_t gid);
